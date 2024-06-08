@@ -46,15 +46,27 @@ def generate_launch_description():
             package='image_proc',
             plugin='image_proc::DebayerNode',
             name='debayer_node',
+            remappings=[
+                ('image', 'image_raw'),
+            ],
+        ),
+        ComposableNode(
+            package='image_proc',
+            plugin='image_proc::RectifyNode',
+            name='rectify_node',
+            remappings=[
+                ('image', 'image_color'),
+            ],
         ),
         ComposableNode(
             package='image_proc',
             plugin='image_proc::ResizeNode',
             name='resize_node',
             remappings=[
-                ('image', 'image_color'),
+                ('image', 'image_rect'),
             ],
             parameters=[{
+                'interpolation': 1,
                 'scale_height': 0.5,
                 'scale_width': 0.5
             }],
